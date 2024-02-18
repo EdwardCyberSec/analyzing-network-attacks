@@ -26,16 +26,19 @@ network interruption
 <h2>Identify the type of attack that may have caused this 
 network interruption</h2>
   
-One possible reason for the website's connection timeout error message is a Denial of Service (DoS) attack. The logs indicate that the web server becomes unresponsive when inundated with an excessive number of SYN packet requests. This occurrence aligns with a specific type of DoS attack known as SYN flooding.
+One potential explanation for the website's connection timeout error message is a DOS attack.
+The logs show that the server stops responding after getting sent to many SYN packets.
+This event could be: a type of DOS attack called SYN flooding.
 
 <h2>Explain how the attack is causing the website malfunction</h2>
 
-When users attempt to connect to the web server, a three-way handshake process takes place using the TCP protocol. This handshake comprises three steps:
+When website visitors try to establish a connection with the web server, a three-way handshake occurs using the TCP protocol. Explain the three steps of the handshake:
 
-1. The source sends a SYN packet to the destination, requesting to initiate a connection.
-2. The destination responds to the source with a SYN-ACK packet, acknowledging the connection request and reserving resources for the upcoming connection.
-3. The source acknowledges the permission to connect by sending a final ACK packet to the destination.
+1. A SYN packet is sent from the source to the destination, requesting to connect.
 
-However, during a SYN flood attack, a malicious actor inundates the server with an excessive number of SYN packets simultaneously, depleting the available resources reserved for connections. Consequently, the server is left with no resources to handle legitimate TCP connection requests.
+2. The destination replies to the source with a SYN-ACK packet to accept the connection request. The destination will reserve resources for the source to connect.
 
-As evident from the logs, the web server has been overwhelmed by the influx of SYN requests, rendering it unable to process further connection attempts from users. Consequently, visitors experience connection timeout errors, as the server is incapable of establishing new connections.
+3. A final ACK packet is sent from the source to the destination acknowledging the permission to connect.
+
+However, when a malicious actor sends a large number of SYN packets all at once the server is not able to establish a SYN/ACK because of the overloading of SYN packets. Which causes the server to not be able to work as intended.
+The logs indicate that it was overloaded and was unable to accept legitimate SYN requests. This affects the server by not allowing anyone who receives a connection timeout error message into the server.
